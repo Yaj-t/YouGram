@@ -13,9 +13,34 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('yougram.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script>
+        function toggleProfileEdit() {
+
+            var overlay = document.createElement("div");
+            overlay.classList.add("dark-overlay");
+            document.body.appendChild(overlay);
+
+            document.getElementById("editProfileContainer").style.display = "block";
+            document.body.style.overflow = "hidden"; // Disable scrolling on the page
+
+        }
+
+        function cancelEdit() {
+            var overlay = document.querySelector(".dark-overlay");
+            if (overlay) {
+                overlay.parentNode.removeChild(overlay);
+            }
+
+            document.getElementById("editProfileContainer").style.display = "none";
+            document.body.style.overflow = "auto"; // Enable scrolling on the page
+            document.body.style.backgroundColor = "transparent"; // Reset the background color
+        }
+    </script>
+
 
     <style>
         body {
@@ -26,18 +51,6 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             line-height: inherit;
-        }
-
-        .profile-image-wrapper {
-            width: 40px;
-            height: 40px;
-        }
-
-        .profile-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
         }
     </style>
 </head>
@@ -85,21 +98,16 @@
 
                         <!-- Edit Profile and Logout -->
                         <li class="nav-item dropdown">
-
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <!-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="#" onclick="toggleProfileEdit();">
                                     {{ __('Edit Profile') }}
-                                </a> -->
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
@@ -115,6 +123,59 @@
             @yield('content')
         </main>
     </div>
+
+
+    <!-- Edit Profile -->
+    <div id="editProfileContainer" class="col-4 profile-Container" style="display: none;">
+        <div class="card">
+
+            <div class="card-header">
+                Add student
+                <button type="button" class="btn btn-danger x-mark" onclick="cancelEdit()">
+                    <span class="x-mark-letter" aria-hidden="true">X</span>
+                </button>
+            </div>
+
+            <div class="card-body">
+                @auth
+                <form action="{{ route('users.update', ['user' => Auth::user()->id]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <a id="profileImage" class="row justify-content-center mb-3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <div class="col-sm-auto profile-image-second-wrapper">
+                            <img src="{{ Auth::check() ? asset(Auth::user()->image) : '' }}" alt="Profile Image">
+                        </div>
+                    </a>
+                    <div class="row mb-3">
+                        <div class="col-sm d-flex justify-content-center">
+                            <input type="file" name="up_image" id="image" class="form-control" style="width: 50%;">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <input type="text" name="name" placeholder="{{ Auth::check() ? Auth::user()->name : '' }}" class="form-control" id="inputid">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <input type="email" name="email" placeholder="{{ Auth::check() ? Auth::user()->email : '' }}" class="form-control" id="inutname">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm d-flex justify-content-center">
+                            <button type="submit" name="updateProfile" class="btn btn-primary" style="width: 50%;"> {{ __('UPDATE') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                @endauth
+
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
