@@ -41,7 +41,6 @@
         }
     </script>
 
-
     <style>
         body {
             margin: 0;
@@ -57,7 +56,8 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #B18E6B;">
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #24272C;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/yougram-high-resolution-logo-color-on-transparent-background.png') }}" style="max-width: 150px; max-height: 150px;">
@@ -78,13 +78,13 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" style="color: white;" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @endif
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" style="color: white;" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
@@ -98,14 +98,14 @@
 
                         <!-- Edit Profile and Logout -->
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" style="color: white;" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" onclick="toggleProfileEdit();">
+                            <div class="dropdown-menu dropdown-menu-end" style="background-color: #24272C" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit();">
                                     {{ __('Edit Profile') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item" href="{{ route('logout') }}" style="color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -126,11 +126,11 @@
 
 
     <!-- Edit Profile -->
-    <div id="editProfileContainer" class="col-4 profile-Container" style="display: none;">
-        <div class="card">
+    <div id="editProfileContainer" class="col-4 profile-Container" style="display: none; background-color:#24272C;">
+        <div class="card" style="background-color:#24272C;">
 
-            <div class="card-header">
-                Add student
+            <div class="card-header" style="color: white">
+                Edit User
                 <button type="button" class="btn btn-danger x-mark" onclick="cancelEdit()">
                     <span class="x-mark-letter" aria-hidden="true">X</span>
                 </button>
@@ -175,6 +175,7 @@
             </div>
         </div>
     </div>
+
 
 </body>
 

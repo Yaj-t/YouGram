@@ -1,17 +1,23 @@
 @extends('layouts.nav')
+@extends('layouts.side')
 
 <head>
+
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('yougram.css') }}">
+
     <style>
         body {
             background-image: none !important;
-            background-color: white;
+            background-color: #0B0E0F !important;
         }
     </style>
 </head>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 

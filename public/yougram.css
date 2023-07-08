@@ -1,3 +1,5 @@
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
 .dark-overlay {
   position: fixed;
   top: 0;
@@ -61,4 +63,26 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
+}
+
+/* Sidebar */
+.side-bar-wrapper {
+  width: 125px; 
+  height: 92.6vh; 
+  position: fixed;
+  background-color: #191B1F;
+  margin-top: 53px;
+}
+
+.side-bar-wrapper ul {
+  margin-top: 70px;
+}
+
+.side-bar-wrapper li {
+  padding-top: 20px;
+}
+
+.side-bar-wrapper svg {
+  width: 35px;
+  height: 45px;
 }
