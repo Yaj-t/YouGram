@@ -138,7 +138,7 @@
 
             <div class="card-body">
                 @auth
-                <form action="{{ route('users.update', ['user' => Auth::user()->id]) }}" method="POST">
+                <form action="{{ route('users.update', ['user' => Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

@@ -54,11 +54,24 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            // Validation rules
+            'up_image' => 'image|mimes:jpeg,jpg',
         ]);
 
-        // Update the user with the new data
-        $user->update($request->all());
+        if ($request->hasFile('up_image')) {
+            $imageName = time() . '.' . $request->file('up_image')->getClientOriginalExtension();
+            $path = $request->file('up_image')->storeAs('', $imageName, 'public');
+            $user->image = 'images/images-profile/' . $imageName;
+        }
+
+        if ($request->filled('name')) {
+            $user->name = $request->input('name');
+        }
+
+        if ($request->filled('email')) {
+            $user->email = $request->input('email');
+        }
+
+        $user->save();
 
         return redirect()->route('home');
     }
