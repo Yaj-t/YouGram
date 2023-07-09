@@ -25,6 +25,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update');
+Route::post('/videos/insert/{user}', [VideoController::class, 'insert'])->name('videos.insert');
 Route::resource('videos', VideoController::class);
 
 // use App\Http\Controllers\Auth\RegisterController;

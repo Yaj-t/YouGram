@@ -59,8 +59,8 @@ class ProfileController extends Controller
 
         if ($request->hasFile('up_image')) {
             $imageName = time() . '.' . $request->file('up_image')->getClientOriginalExtension();
-            $path = $request->file('up_image')->storeAs('', $imageName, 'public');
-            $user->image = 'images/images-profile/' . $imageName;
+            $path = $request->file('up_image')->storeAs('public/images/images-profile', $imageName);
+            $user->image = 'storage/images/images-profile/' . $imageName;
         }
 
         if ($request->filled('name')) {

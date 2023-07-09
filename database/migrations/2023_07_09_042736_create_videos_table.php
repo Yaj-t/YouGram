@@ -12,9 +12,11 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('video_path')->default('');
             $table->string('videos_title');
             $table->string('videos_description');
-            $table->enum('videos_tags', ['php', 'c++', 'mysql', 'swift', 'c#', 'others'])->default('others');
+            $table->unsignedBigInteger('views')->default(0);
+            $table->unsignedBigInteger('likes')->default(0);
             $table->timestamps();
         });
     }
