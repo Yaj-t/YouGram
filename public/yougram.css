@@ -79,11 +79,13 @@
 }
 
 .side-bar-wrapper li {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
+  padding-top: 20px;
 }
 
+.side-bar-wrapper svg {
+  width: 35px;
+  height: 45px;
+}
 
 /* home.blade trends */
 
@@ -100,14 +102,15 @@
 
 .trends-home .card-body .row .col-md-2 {
   flex-basis: 20%;
-   padding: 10px;
- box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .trends-home .card-body .row .col-md-2 img {
   width: 100%;
   height: 150px;
   object-fit: cover;
-}{ {
+}
+
+.trends-home img {
   border-radius: 5%;
 }
