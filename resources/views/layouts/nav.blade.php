@@ -17,29 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script>
-        function toggleProfileEdit() {
-
-            var overlay = document.createElement("div");
-            overlay.classList.add("dark-overlay");
-            document.body.appendChild(overlay);
-
-            document.getElementById("editProfileContainer").style.display = "block";
-            document.body.style.overflow = "hidden"; // Disable scrolling on the page
-
-        }
-
-        function cancelEdit() {
-            var overlay = document.querySelector(".dark-overlay");
-            if (overlay) {
-                overlay.parentNode.removeChild(overlay);
-            }
-
-            document.getElementById("editProfileContainer").style.display = "none";
-            document.body.style.overflow = "auto"; // Enable scrolling on the page
-            document.body.style.backgroundColor = "transparent"; // Reset the background color
-        }
-    </script>
+    <script src="{{ asset('custom.js') }}"></script>
 
     <style>
         body {
@@ -105,6 +83,9 @@
                                 <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit();">
                                     {{ __('Edit Profile') }}
                                 </a>
+                                <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit2();">
+                                    {{ __('Upload Video') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" style="color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -152,7 +133,6 @@
                             <input type="file" name="up_image" id="image" class="form-control" style="width: 50%;">
                         </div>
                     </div>
-
                     <div class="row mb-3">
                         <div class="col-sm">
                             <input type="text" name="name" placeholder="{{ Auth::check() ? Auth::user()->name : '' }}" class="form-control" id="inputid">
@@ -171,11 +151,83 @@
                     </div>
                 </form>
                 @endauth
-
             </div>
         </div>
     </div>
 
+
+
+    <!-- Upload Video -->
+    <div id="editProfileContainer2" class="col-4 profile-Container" style="display: none; background-color:#24272C;">
+        <div class="card" style="background-color:#24272C;">
+
+            <div class="card-header" style="color: white">
+                Upload Video
+                <button type="button" class="btn btn-danger x-mark" onclick="cancelEdit2()">
+                    <span class="x-mark-letter" aria-hidden="true">X</span>
+                </button>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row mb-3">
+                    <div class="col-sm d-flex justify-content-center">
+                        <input type="file" name="uv_video" id="video" class="form-control" style="width: 50%;" accept="video/mp4">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <input type="text" name="uv_title" placeholder="Title" class="form-control" id="inputid">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <textarea name="uv_description" placeholder="Description" class="form-control" id="inputid" style="height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <label class="form-check" style="color: white;">
+                                <input type="checkbox" name="uv_php" value="php" class="form-check-input">
+                                PHP
+                            </label>
+                            <label class="form-check" style="color: white;">
+                                <input type="checkbox" name="uv_cplus2" value="c++" class="form-check-input">
+                                C++
+                            </label>
+                            <label class="form-check" style="color: white;">
+                                <input type="checkbox" name="uv_mysql" value="mysql" class="form-check-input">
+                                MySQL
+                            </label>
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-check" style="color: white;">
+                                <input type="checkbox" name="uv_swift" value="swift" class="form-check-input">
+                                Swift
+                            </label>
+                            <label class="form-check" style="color: white;">
+                                <input type="checkbox" name="uv_csharp" value="c#" class="form-check-input">
+                                C#
+                            </label>
+                            <label class="form-check" style="color: white;">
+                                <input type="checkbox" name="uv_others" value="others" class="form-check-input">
+                                Others
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm d-flex justify-content-center">
+                        <button type="submit" name="uploadVideo" class="btn btn-primary" style="width: 50%;"> {{ __('UPLOAD') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 
