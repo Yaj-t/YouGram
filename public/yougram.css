@@ -79,10 +79,35 @@
 }
 
 .side-bar-wrapper li {
-  padding-top: 20px;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
-.side-bar-wrapper svg {
-  width: 35px;
-  height: 45px;
+
+/* home.blade trends */
+
+.trends-home .card {
+  background-color: #191B1F;
+  color: white;
+  padding: 20px;
+}
+
+.trends-home .card-body .row {
+  display: flex;
+  justify-content: center;
+}
+
+.trends-home .card-body .row .col-md-2 {
+  flex-basis: 20%;
+   padding: 10px;
+ box-sizing: border-box;
+}
+
+.trends-home .card-body .row .col-md-2 img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}{ {
+  border-radius: 5%;
 }

@@ -15,23 +15,45 @@
     </style>
 </head>
 @section('content')
-<div class="container">
+<div class="container trends-home" style="margin-right: 25px;">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+                <div class="card-header">
+                    <h5 style="font-weight: bold;">Programming Categories</h5>
+                </div>
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a>
+                                <img src="{{ asset('images/logo-Cplusplus.jpg') }}" alt="C++">
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a>
+                                <img src="{{ asset('images/logo-Csharp.jpg') }}" alt="C#">
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a>
+                                <img src="{{ asset('images/logo-mysql.jpg') }}" alt="MySQL">
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a>
+                                <img src="{{ asset('images/logo-php.jpg') }}" alt="PHP">
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a>
+                                <img src="{{ asset('images/logo-swift.jpg') }}" alt="PHP">
+                            </a>
+                        </div>
                     </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
