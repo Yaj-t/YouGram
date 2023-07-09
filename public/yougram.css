@@ -1,0 +1,88 @@
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+.dark-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity (0.5 in this example) to control the level of darkness */
+  pointer-events: none; /* Allows clicks to reach the underlying elements */
+  z-index: 1; /* Adjust the z-index if necessary to ensure the overlay is on top of other elements */
+}
+
+.edit-profile-container {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0); 
+  z-index: 2; /* Adjust the z-index to make sure the containers inside editProfileContainer appear above the overlay */
+}
+
+.x-mark {
+  width: 18px; /* Adjust the width as needed */
+  height: 28px; /* Adjust the height as needed */
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.x-mark-letter {
+  font-size: 10px;
+  top: -20px;
+  right: -20px;
+}
+
+.profile-image-wrapper {
+  width: 40px;
+  height: 40px;
+}
+
+.profile-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-image-second-wrapper {
+  width: 200px;
+  height: 200px;
+}
+
+.profile-image-second-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-container {
+  background-color: #B39D96;
+  border-radius: 10%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+/* Sidebar */
+.side-bar-wrapper {
+  width: 125px; 
+  height: 92.6vh; 
+  position: fixed;
+  background-color: #191B1F;
+  margin-top: 53px;
+}
+
+.side-bar-wrapper ul {
+  margin-top: 70px;
+}
+
+.side-bar-wrapper li {
+  padding-top: 20px;
+}
+
+.side-bar-wrapper svg {
+  width: 35px;
+  height: 45px;
+}
