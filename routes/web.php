@@ -24,11 +24,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/admin-users', function () {
+    return view('users-admin');
+});
+Route::get('/users-admin', [ProfileController::class, 'index'])->name('users-admin');
+
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update');
 Route::post('/videos/insert/{user}', [VideoController::class, 'insert'])->name('videos.insert');
 Route::resource('videos', VideoController::class);
-
-// use App\Http\Controllers\Auth\RegisterController;
-
-// Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/register', [RegisterController::class, 'register']);

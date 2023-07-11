@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class ProfileController extends Controller
 {
@@ -13,39 +14,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $users = User::all(); // Retrieve all users from the users table
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $profile)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $profile)
-    {
-        //
+        return view('users-admin', compact('users'));
     }
 
     /**

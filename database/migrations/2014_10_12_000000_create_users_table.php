@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('image')->default('images/yougram_default_profile.jpg');
+            $table->enum('usertype', ['yougrammer', 'admin'])->default('yougrammer');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

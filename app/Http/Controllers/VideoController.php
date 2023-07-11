@@ -22,7 +22,7 @@ class VideoController extends Controller
     public function insert(Request $request, User $user, TagsController $tagsController)
     {
         $request->validate([
-            'uv_video' => 'required|mimes:mp4', // Validate video file
+            'uv_video' => 'required|mimes:mp4',
             'uv_title' => 'required',
             'uv_description' => 'required',
         ]);
@@ -33,17 +33,14 @@ class VideoController extends Controller
         $video->videos_description = $request->input('uv_description');
         $video->save();
 
-        // Get the selected tags from the request
         $selectedTags = $request->only(['php', 'cplusplus', 'mysql', 'swift', 'csharp', 'others']);
 
-        // Store the selected tags in the tags table
         $tagsController->storeTags($video, $selectedTags);
 
-        // Handle video file upload, if required
         if ($request->hasFile('uv_video')) {
             $videoFile = $request->file('uv_video');
-            $videoPath = $videoFile->store('public/videos'); // Save the video file to the specified path
-            $video->video_path = Storage::url($videoPath); // Store the video path in the database
+            $videoPath = $videoFile->store('public/videos');
+            $video->video_path = Storage::url($videoPath);
             $video->save();
         }
 

@@ -114,3 +114,14 @@
 .trends-home img {
   border-radius: 5%;
 }
+
+.trends-home table th {
+  color: white; 
+  background-color: #191B1F;
+}
+
+.trends-home table th,
+.trends-home table td {
+    border: 3px solid #7C9982;
+    padding: 8px;
+}
