@@ -34,7 +34,7 @@
 <body>
     <div id="app">
         <!-- Nav Bar -->
-        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #24272C;">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #24272C;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/yougram-high-resolution-logo-color-on-transparent-background.png') }}" style="max-width: 150px; max-height: 150px;">
