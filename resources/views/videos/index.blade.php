@@ -60,7 +60,7 @@
         <div class="container videos" style="margin-top: 20px;">
             <div class="row">
                 @foreach ($videos as $video)
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-bottom: 20px;">
                     <div class="card">
                         <div class="card-header">
                             <h5>{{ $video->videos_title }}</h5>
@@ -76,6 +76,7 @@
                 @endforeach
             </div>
         </div>
+
 
 
 
