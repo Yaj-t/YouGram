@@ -22,7 +22,6 @@
     <style>
         body {
             margin: 0;
-            background-image: url('images/login_and_register_background.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

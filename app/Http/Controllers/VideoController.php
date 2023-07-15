@@ -11,9 +11,11 @@ class VideoController extends Controller
 {
     public function index()
     {
-        // Retrieve all videos
-    }
+        $videos = Video::latest()->get();
 
+        return view('videos.index', compact('videos'));
+    }
+    
     public function create()
     {
         // Show the form to create a new video
