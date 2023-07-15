@@ -12,9 +12,10 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::latest()->get();
-
+    
         return view('videos.index', compact('videos'));
     }
+
     
     public function create()
     {
@@ -46,7 +47,7 @@ class VideoController extends Controller
             $video->save();
         }
 
-        return redirect()->route('home');
+        return redirect()->route('videos.index');
     }
 
     public function show(Video $video)
