@@ -98,10 +98,11 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        @yield('sidebar');
+        <main class="py-4" style="margin: 25px auto; ">
             @yield('content')
         </main>
+
     </div>
 
 

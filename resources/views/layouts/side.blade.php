@@ -1,23 +1,4 @@
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('navbar.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('yougram.css') }}">
-
-</head>
-
-<body>
-
+@section('sidebar')
     <!-- Side Bar -->
     <div class="d-flex flex-column flex-shrink-0 side-bar-wrapper">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
@@ -44,6 +25,4 @@
             </li>
         </ul>
     </div>
-</body>
-
-</html>
+@endsection

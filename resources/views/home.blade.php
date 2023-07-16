@@ -17,7 +17,7 @@
 @section('content')
 
 <body>
-    <div class="container trends-home" style="margin-right: 25px;">
+    <div class="container trends-home" style="">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
