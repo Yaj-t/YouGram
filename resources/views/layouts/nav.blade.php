@@ -31,7 +31,7 @@
     </style>
 </head>
 
-<body>
+<body style="background-color: #0B0E0F !important;">
     <div id="app">
         <!-- Nav Bar -->
         <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #24272C;">
@@ -48,6 +48,17 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
+
+                    <!-- Middle of Navbar -->
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">Search</button>
+                            </form>
+                        </li>
+                    </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -99,7 +110,7 @@
             </div>
         </nav>
         @yield('sidebar');
-        <main class="py-4" style="margin: 25px auto; ">
+        <main class="py-4" style="margin: 25px auto;">
             @yield('content')
         </main>
 
