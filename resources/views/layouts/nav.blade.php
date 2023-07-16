@@ -111,7 +111,10 @@
         </nav>
         @yield('sidebar');
         <main class="py-4" style="margin: 25px auto; ">
-            @yield('content')
+            <div class="container trends-home" style="margin-right: 25px;">
+                @yield('categories')
+                @yield('content')
+            </div>
         </main>
 
     </div>
