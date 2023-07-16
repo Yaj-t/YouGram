@@ -1,3 +1,4 @@
+@extends('layouts.app') 
 @extends('layouts.nav')
 @extends('layouts.side')
 @extends('layouts.categories')
