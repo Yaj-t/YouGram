@@ -27,6 +27,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             line-height: inherit;
+            background-color: #0B0E0F;
         }
     </style>
 </head>
