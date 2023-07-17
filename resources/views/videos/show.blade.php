@@ -8,10 +8,5 @@
         Your browser does not support the video tag.
     </video>
     <br>
-    <a href="{{ route('videos.edit', $video) }}">Edit</a>
-    <form action="{{ route('videos.destroy', $video) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete</button>
-    </form>
+
 @endsection
