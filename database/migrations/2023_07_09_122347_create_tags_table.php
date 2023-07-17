@@ -3,33 +3,37 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Tag;
 
-return new class extends Migration
+class CreateTagsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-
-    public function up(): void
+    public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('video_id')->constrained('videos')->onDelete('cascade');
-            $table->boolean('php')->default(false);
-            $table->boolean('cplusplus')->default(false);
-            $table->boolean('mysql')->default(false);
-            $table->boolean('swift')->default(false);
-            $table->boolean('csharp')->default(false);
-            $table->boolean('others')->default(false);
+            $table->string('name');
             $table->timestamps();
         });
+
+         // Create default tags
+         $defaultTags = [
+            'php',
+            'cplusplus',
+            'mysql',
+            'swift',
+            'csharp',
+            'others',
+        ];
+
+        foreach ($defaultTags as $tagName) {
+            $tag = new Tag();
+            $tag->name = $tagName;
+            $tag->save();
+        }
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('tags');
     }
-};
+}

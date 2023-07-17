@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Tag;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +17,10 @@ class VideoController extends Controller
     }
 
     public function create()
-    {
-        return view('videos.create');
+    {   
+        $tags = Tag::all();
+
+        return view('videos.create', compact('tags'));
     }
 
     public function store(Request $request)
@@ -27,6 +29,7 @@ class VideoController extends Controller
             'uv_video' => 'required|mimes:mp4',
             'uv_title' => 'required',
             'uv_description' => 'required',
+            'tags' => 'nullable|array',
         ]);
 
         $user = Auth::user();
@@ -37,6 +40,8 @@ class VideoController extends Controller
         $video->videos_description = $request->input('uv_description');
         $video->save();
 
+        $tags = $request->input('tags', []);
+        $video->tags()->sync($tags);
         if ($request->hasFile('uv_video')) {
             $videoFile = $request->file('uv_video');
             $videoPath = $videoFile->store('public/videos');
@@ -62,6 +67,7 @@ class VideoController extends Controller
         $request->validate([
             'uv_title' => 'required',
             'uv_description' => 'required',
+            'tags' => 'nullable|array',
         ]);
 
         $video->videos_title = $request->input('uv_title');
@@ -80,9 +86,9 @@ class VideoController extends Controller
         return redirect()->route('videos.index');
     }
 
-    public function userVideos()
+     public function userVideos()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $videos = $user->videos()->latest()->get();
 
         return view('videos.user_videos', compact('videos'));
