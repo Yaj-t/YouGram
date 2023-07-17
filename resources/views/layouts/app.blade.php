@@ -107,7 +107,7 @@
             <div class="card-body">
 
                 @auth
-                <form action="{{ route('videos.insert', ['user' => Auth::user()->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('videos.insert', ['user' => Auth::user()->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
                     @csrf
 
                     <div class="row mb-3">
@@ -171,5 +171,15 @@
             </div>
         </div>
     </div>
+    <script>
+    function disableButton() {
+        // Disable the button
+        var button = document.getElementsByName("uploadVideo")[0];
+        button.disabled = true;
+        
+        // Change the button text
+        button.innerHTML = "Uploading...";
+    }
+</script>
 </body>
 </html>
