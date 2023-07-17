@@ -33,11 +33,9 @@
 </head>
 
 <body>
+    @yield('sidebar')
     <div id="app">
-        @yield('sidebar')
-        
-
-        <main class="py-4" style="margin: 40px auto 0 auto; background-color: #0B0E0F;">
+        <main class="py-4" style="margin: 60px auto 0 auto; background-color: #0B0E0F;">
             <div class="container trends-home" style="margin-right: 25px;">
                 @yield('categories')
                 @yield('content')

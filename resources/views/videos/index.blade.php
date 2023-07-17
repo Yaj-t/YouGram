@@ -1,8 +1,10 @@
 @extends('layouts.app') 
-@extends('layouts.nav')
 @extends('layouts.side')
+@extends('layouts.nav')
+
 @extends('layouts.categories')
 @section('content')
+    
         <div class="container videos" style="margin-top: 20px;">
             <div class="row">
                 @foreach ($videos as $video)
@@ -22,4 +24,5 @@
                 @endforeach
             </div>
         </div>
+    
 @endsection

@@ -71,7 +71,7 @@
   height: 92.6vh; 
   position: fixed;
   background-color: #191B1F;
-  margin-top: 53px;
+  padding-top: 8px;
 }
 
 .side-bar-wrapper ul {
