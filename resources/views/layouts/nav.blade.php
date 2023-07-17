@@ -61,6 +61,9 @@
                                 <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit2();">
                                     {{ __('Upload Video') }}
                                 </a>
+                                <a class="dropdown-item" href="#" style="color: white;" href="{{ route('videos-user') }}">
+                                    Your Videos
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" style="color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
