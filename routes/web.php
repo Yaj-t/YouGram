@@ -24,12 +24,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::redirect('/home', 'videos')->name('home');
-Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 Route::get('/admin-users', function () {
     return view('users-admin');
 });
 Route::get('/users-admin', [ProfileController::class, 'index'])->name('users-admin');
 
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update');
-Route::post('/videos/insert/{user}', [VideoController::class, 'insert'])->name('videos.insert');
-Route::resource('videos', VideoController::class);
+
+Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
+Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
+Route::get('/videos/{video}', [VideoController::class, 'show'])->name('videos.show');
+Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update');
+Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy');

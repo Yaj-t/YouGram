@@ -12,7 +12,7 @@
             <div class="card-body">
 
                 @auth
-                <form action="{{ route('videos.insert', ['user' => Auth::user()->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
+                <form action="{{ route('videos.store')}}" method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
                     @csrf
 
                     <div class="row mb-3">
