@@ -79,4 +79,13 @@ class VideoController extends Controller
 
         return redirect()->route('videos.index');
     }
+
+    public function userVideos()
+    {
+        $user = auth()->user();
+        $videos = $user->videos()->latest()->get();
+
+        return view('videos.user_videos', compact('videos'));
+    }
+    
 }

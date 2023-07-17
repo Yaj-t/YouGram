@@ -32,6 +32,7 @@ Route::get('/users-admin', [ProfileController::class, 'index'])->name('users-adm
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update');
 
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/videos-user', [VideoController::class, 'userVideos'])->name('videos.videos-user');
 Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
 Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
 Route::get('/videos/{video}', [VideoController::class, 'show'])->name('videos.show');
