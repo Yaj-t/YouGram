@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::redirect('/home', 'videos')->name('home');
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 Route::get('/admin-users', function () {
     return view('users-admin');
