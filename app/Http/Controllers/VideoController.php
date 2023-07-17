@@ -13,10 +13,11 @@ class VideoController extends Controller
     {
         $videos = Video::latest()->get();
 
+        // dd($videos);
         return view('videos.index', compact('videos'));
     }
 
-    public function create()
+    public function create()    
     {   
         $tags = Tag::all();
 
@@ -30,6 +31,7 @@ class VideoController extends Controller
             'uv_title' => 'required',
             'uv_description' => 'required',
             'tags' => 'nullable|array',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user = Auth::user();
@@ -38,19 +40,27 @@ class VideoController extends Controller
         $video->user_id = $user->id;
         $video->videos_title = $request->input('uv_title');
         $video->videos_description = $request->input('uv_description');
-        $video->save();
 
-        $tags = $request->input('tags', []);
-        $video->tags()->sync($tags);
         if ($request->hasFile('uv_video')) {
             $videoFile = $request->file('uv_video');
             $videoPath = $videoFile->store('public/videos');
             $video->video_path = Storage::url($videoPath);
-            $video->save();
         }
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailFile = $request->file('thumbnail');
+            $thumbnailPath = $thumbnailFile->store('public/thumbnails');
+            $video->thumbnail_path = Storage::url($thumbnailPath);
+        }
+
+        $video->save();
+
+        $tags = $request->input('tags', []);
+        $video->tags()->sync($tags);
 
         return redirect()->route('videos.index');
     }
+
 
     public function show(Video $video)
     {
@@ -68,11 +78,27 @@ class VideoController extends Controller
             'uv_title' => 'required',
             'uv_description' => 'required',
             'tags' => 'nullable|array',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $video->videos_title = $request->input('uv_title');
         $video->videos_description = $request->input('uv_description');
+
+        if ($request->hasFile('thumbnail')) {
+            // Delete the existing thumbnail
+            if ($video->thumbnail_path) {
+                Storage::delete($video->thumbnail_path);
+            }
+
+            $thumbnailFile = $request->file('thumbnail');
+            $thumbnailPath = $thumbnailFile->store('public/thumbnails');
+            $video->thumbnail_path = $thumbnailPath;
+        }
+
         $video->save();
+
+        $tags = $request->input('tags', []);
+        $video->tags()->sync($tags);
 
         return redirect()->route('videos.index');
     }
