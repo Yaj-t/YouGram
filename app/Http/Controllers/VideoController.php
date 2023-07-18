@@ -109,7 +109,7 @@ class VideoController extends Controller
 
         // Optionally, delete the associated video file from storage
 
-        return redirect()->route('videos.index');
+        return back();
     }
 
      public function userVideos()

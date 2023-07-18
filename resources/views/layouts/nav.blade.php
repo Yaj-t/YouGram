@@ -55,6 +55,9 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" style="background-color: #24272C" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('profile.show', Auth::user()) }}" style="color: white;"> 
+                                    {{ __('Profile Page') }}
+                                </a>
                                 <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit();">
                                     {{ __('Edit Profile') }}
                                 </a>

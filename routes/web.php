@@ -49,6 +49,10 @@ Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('vid
 
 
 Route::post('/subscribe/{user}', [SubscriptionController::class, 'subscribe'])->name('subscribe')->middleware('auth');
-Route::post('/unsubscribe/{user}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe')->middleware('auth');
+// Route::post('/unsubscribe/{user}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe')->middleware('auth');
+Route::delete('/unsubscribe/{user}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+
+
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
 
