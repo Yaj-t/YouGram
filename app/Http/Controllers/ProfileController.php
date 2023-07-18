@@ -47,6 +47,16 @@ class ProfileController extends Controller
         return redirect()->route('home');
     }
 
+    public function show(User $user)
+    {
+        // Retrieve videos, subscribers, subscriptions, or any other data related to the user
+        $videos = $user->videos;
+        $subscribers = $user->subscribers;
+        $subscriptions = $user->subscriptions;
+
+        return view('profile.show', compact('user', 'videos', 'subscribers', 'subscriptions'));
+    }
+
     /**
      * Remove the specified resource from storage.
      */
