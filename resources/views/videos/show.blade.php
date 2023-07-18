@@ -20,7 +20,19 @@
             <span>Likes: {{ $video->likes_count }}</span>
         </div>
         <button class="likes-button"><i class="far fa-thumbs-up"></i> Like</button>
-        <button class="subscribe-button"><i class="fas fa-plus"></i> Subscribe</button>
+            @if(auth()->user()->id !== $video->user->id)
+                @if(auth()->user()->isSubscribedTo($video->user))
+                    <form action="{{ route('unsubscribe', $video->user) }}" method="post">
+                        @csrf
+                        <button type="submit">Unsubscribe</button>
+                    </form>
+                @else
+                    <form action="{{ route('subscribe', $video->user) }}" method="post">
+                        @csrf
+                        <button type="submit">Subscribe</button>
+                    </form>
+                @endif
+            @endif
         <div class="video-description mt-4">
             {{ $video->videos_description }}
         </div>

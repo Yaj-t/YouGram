@@ -64,6 +64,9 @@
                                 <a class="dropdown-item" href="{{ route('videos-user') }}" style="color: white;">
                                     {{ __('Your Videos') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('user.subscribers', Auth::user()) }}" style="color: white;">
+                                    {{ __('Your Subscribers') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" style="color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>

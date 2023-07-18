@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Video;
 
@@ -58,4 +59,20 @@ class User extends Authenticatable
 
         return view('videos.user_videos', compact('videos'));
     }
+
+    public function subscriptions():BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'subscriptions', 'subscriber_id', 'user_id');
+    }
+
+    public function subscribers():HasMany
+    {
+        return $this->HasMany(User::class, 'subscriptions', 'subscriber_id', 'user_id');
+    }
+
+    public function isSubscribedTo(User $channel)
+    {
+        return $this->subscriptions->contains($channel);
+    }
+
 }
