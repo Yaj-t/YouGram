@@ -58,8 +58,14 @@
                                 <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit();">
                                     {{ __('Edit Profile') }}
                                 </a>
-                                <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit2();">
+                                <a class="dropdown-item" href="{{ route('videos.create') }}" style="color: white;" >
                                     {{ __('Upload Video') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('videos-user') }}" style="color: white;">
+                                    {{ __('Your Videos') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.subscribers', Auth::user()) }}" style="color: white;">
+                                    {{ __('Your Subscribers') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" style="color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

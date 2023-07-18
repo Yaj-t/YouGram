@@ -3,10 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Video;
 
 class User extends Authenticatable
 {
@@ -42,4 +46,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class);
+    }
+
+    public function userVideos()
+    {
+        $user = auth()->user();
+        $videos = $user->videos()->latest()->get();
+
+        return view('videos.user_videos', compact('videos'));
+    }
+
+    public function subscriptions():BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'subscriptions', 'subscriber_id', 'user_id');
+    }
+
+    public function subscribers():HasMany
+    {
+        return $this->HasMany(User::class, 'subscriptions', 'subscriber_id', 'user_id');
+    }
+
+    public function isSubscribedTo(User $channel)
+    {
+        return $this->subscriptions->contains($channel);
+    }
+
 }
