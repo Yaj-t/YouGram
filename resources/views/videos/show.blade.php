@@ -11,7 +11,7 @@
     <div class="video-info container mt-4" style="color:white;">
         <div class="video-title mb-2">{{ $video->videos_title }}</div>
         <div class="uploader-info mb-2">
-            <img src="{{ $video->user->image }}" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+            <img src="{{ asset($video->user->image) }}" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
             {{ $video->user->name }}
         </div>
         <div class="views-likes mb-2">

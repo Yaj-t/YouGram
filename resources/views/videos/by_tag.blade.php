@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-header" style="position: relative; margin-top: 20px;">
                         <div style="position: absolute; bottom: 10px; left: 10px;">
-                            <img src="{{ $video->user->image }}" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">
+                            <img src="{{ asset($video->user->image) }}" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">
                         </div>
                         <div style="padding-left: 60px;">
                             <h5>{{ $video->videos_title }}</h5>

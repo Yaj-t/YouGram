@@ -40,7 +40,7 @@
         <h2>Liked Videos</h2>
         <ul>
             @foreach ($likedVideos as $likedVideo)
-                <li>{{ $likedVideo->video->videos_title }}</li>
+                <li>{{ $likedVideo->title }}</li>
             @endforeach
         </ul>
     </div>
