@@ -75,4 +75,9 @@ class User extends Authenticatable
         return $this->subscriptions->contains($channel);
     }
 
+    public function likes():HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
 }

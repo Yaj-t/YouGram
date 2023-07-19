@@ -17,9 +17,23 @@
         <div class="views-likes mb-2">
             <span>Views: {{ $video->views }}</span>
             <span>&nbsp;&middot;&nbsp;</span>
-            <span>Likes: {{ $video->likes_count }}</span>
+            <span>Likes: {{ $video->likes->count() }}</span>
         </div>
-        <button class="likes-button"><i class="far fa-thumbs-up"></i> Like</button>
+            <!-- Like/Unlike buttons -->
+            @if (auth()->check())
+                @if (auth()->user()->likes->contains('video_id', $video->id))
+                    <form action="{{ route('unlike', $video) }}" method="post">
+                        @csrf
+                        <button type="submit">Unlike</button>
+                    </form>
+                @else
+                    <form action="{{ route('like', $video) }}" method="post">
+                        @csrf
+                        <button type="submit">Like</button>
+                    </form>
+                @endif
+            @endif
+            <!-- Subscribe/Unsubscribe buttons -->
             @if(auth()->user()->id !== $video->user->id)
                 @if(auth()->user()->isSubscribedTo($video->user))
                     <form action="{{ route('unsubscribe', $video->user) }}" method="post">

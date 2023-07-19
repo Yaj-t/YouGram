@@ -13,7 +13,7 @@
         <h2>Videos</h2>
         <ul>
             @foreach ($videos as $video)
-                <li>{{ $video->title }}</li>
+                <li>{{ $video->videos_title }}</li>
             @endforeach
         </ul>
 
@@ -35,6 +35,12 @@
                         <button type="submit">Unsubscribe</button>
                     </form>
                 </li>
+            @endforeach
+        </ul>
+        <h2>Liked Videos</h2>
+        <ul>
+            @foreach ($likedVideos as $likedVideo)
+                <li>{{ $likedVideo->video->videos_title }}</li>
             @endforeach
         </ul>
     </div>

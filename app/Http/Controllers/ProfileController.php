@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -53,8 +54,10 @@ class ProfileController extends Controller
         $videos = $user->videos;
         $subscribers = $user->subscribers;
         $subscriptions = $user->subscriptions;
+        $likedVideos = $user->likes()->with('video')->get();    
 
-        return view('profile.show', compact('user', 'videos', 'subscribers', 'subscriptions'));
+
+        return view('profile.show', compact('user', 'videos', 'subscribers', 'subscriptions', 'likedVideos'));
     }
 
     /**

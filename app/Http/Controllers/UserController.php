@@ -9,12 +9,14 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        $subscriptions = $user->subscriptions;
+        $videos = $user->videos;
         $subscribers = $user->subscribers;
+        $subscriptions = $user->subscriptions;
+        $likedVideos = $user->likes()->with('video')->get();
+        dd(compact('user', 'videos', 'subscribers', 'subscriptions', 'likedVideos'));
 
-        return view('user.profile', compact('user', 'subscriptions', 'subscribers'));
+        return view('profile.show', compact('user', 'videos', 'subscribers', 'subscriptions', 'likedVideos'));
     }
-
     public function subscriptions(User $user)
     {
         $subscriptions = $user->subscriptions;
