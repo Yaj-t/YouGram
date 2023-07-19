@@ -39,6 +39,7 @@ Route::get('/user/{user}/subscriptions', [UserController::class, 'subscriptions'
 Route::get('/user/{user}/subscribers', [UserController::class, 'subscribers'])->name('user.subscribers')->middleware('auth');
 
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index')->middleware('auth');
+Route::get('/videos/tag/{tag}', [VideoController::class, 'videosWithTag'])->name('videos.tag')->middleware('auth');
 Route::get('/videos-user', [VideoController::class, 'userVideos'])->name('videos-user')->middleware('auth');
 Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create')->middleware('auth');
 Route::post('/videos', [VideoController::class, 'store'])->name('videos.store')->middleware('auth');

@@ -13,8 +13,15 @@ class VideoController extends Controller
     {
         $videos = Video::latest()->get();
 
-        // dd($videos);
         return view('videos.index', compact('videos'));
+    }
+
+    public function videosWithTag($tag)
+    {
+        $tag = Tag::where('name', $tag)->firstOrFail();
+        $videos = $tag->videos;
+
+        return view('videos.by_tag', compact('tag', 'videos'));
     }
 
     public function create()    
@@ -55,8 +62,14 @@ class VideoController extends Controller
 
         $video->save();
 
+        // Handle video tags
         $tags = $request->input('tags', []);
-        $video->tags()->sync($tags);
+        if (isset($tags)) {
+            foreach ($tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $video->tags()->attach($tag->id);
+            }
+        }
 
         return redirect()->route('videos.index');
     }

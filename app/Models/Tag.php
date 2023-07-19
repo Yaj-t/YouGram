@@ -8,17 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
-    protected $fillable = [
-        'php',
-        'cplusplus',
-        'mysql',
-        'swift',
-        'csharp',
-        'others',
-    ];
 
-    public function video(): BelongsToMany
+    public function videos(): BelongsToMany
     {
-        return $this->belongsToMany(Video::class);
+        return $this->belongsToMany(Video::class, 'tag_video');
     }
 }
