@@ -24,6 +24,7 @@ class UserController extends Controller
     public function subscribers(User $user)
     {
         $subscribers = $user->subscribers;
+        // dd(compact('user', 'subscribers'));
         return view('user.subscribers', compact('user', 'subscribers'));
     }
 }
