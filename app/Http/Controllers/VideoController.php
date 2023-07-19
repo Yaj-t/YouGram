@@ -64,6 +64,7 @@ class VideoController extends Controller
 
     public function show(Video $video)
     {
+        $video->increment('views');
         return view('videos.show', compact('video'));
     }
 

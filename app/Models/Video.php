@@ -15,6 +15,7 @@ class Video extends Model
         'videos_description', 
         'video_path', 
         'thumbnail_path',
+        'views',
     ];
 
     public function user(): BelongsTo
