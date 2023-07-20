@@ -17,13 +17,12 @@
                                         <!-- Middle of Navbar -->
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <form action="{{ route('videos.search') }}" method="get" class="d-flex">
+                                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-light" type="submit">Search</button>
                             </form>
                         </li>
                     </ul>
-
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

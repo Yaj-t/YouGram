@@ -49,6 +49,7 @@ Route::get('/videos/{video}', [VideoController::class, 'show'])->name('videos.sh
 Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit')->middleware('auth');
 Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update')->middleware('auth');
 Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy')->middleware('auth');
+Route::get('/search', [VideoController::class, 'search'])->name('videos.search');
 
 
 Route::post('/subscribe/{user}', [SubscriptionController::class, 'subscribe'])->name('subscribe')->middleware('auth');

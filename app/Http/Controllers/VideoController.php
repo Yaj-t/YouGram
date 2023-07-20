@@ -133,5 +133,21 @@ class VideoController extends Controller
 
         return view('videos.user_videos', compact('videos'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $videos = Video::where('videos_title', 'like', "%$query%")
+                    ->orWhereHas('tags', function ($tagQuery) use ($query) {
+                        $tagQuery->where('name', 'like', "%$query%");
+                    })
+                    ->orWhereHas('user', function ($userQuery) use ($query) {
+                        $userQuery->where('name', 'like', "%$query%");
+                    })
+                    ->get();
+
+        return view('videos.search', compact('videos'));
+    }
     
 }
