@@ -149,5 +149,17 @@ class VideoController extends Controller
 
         return view('videos.search', compact('videos'));
     }
+
+    public function trending()
+    {
+
+        // fetch videos with the highest views in the last 7 days
+    
+        $videos = Video::whereDate('created_at', '>=', now()->subDays(7))
+                               ->orderBy('views', 'desc')
+                               ->get();
+    
+        return view('videos.trending', compact('videos'));
+    }
     
 }

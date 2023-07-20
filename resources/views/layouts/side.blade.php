@@ -17,7 +17,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link py-3 border-bottom" title="Trending" data-bs-toggle="tooltip" data-bs-placement="right">
+            <a href="{{ route('videos.trending') }}" class="nav-link py-3 border-bottom" title="Trending" data-bs-toggle="tooltip" data-bs-placement="right">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="green" class="bi bi-fire" viewBox="0 0 16 16">
                     <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.89-1-2.5-3-2.5-3C.725 3.5 0 5 0 8.5 0 14 4.029 16 8 16Zm-5.52-1.114c-.146-.097-.34-.136-.52-.112A3.618 3.618 0 0 1 3 8.5C3 6 5 5.5 5 5.5c1.5 1.5 1 4 1 4Zm9.04 0c.146-.097.34-.136.52-.112a3.618 3.618 0 0 0 .48-3.774C13 6 11 5.5 11 5.5c-1.5 1.5-1 4-1 4Z" />
                 </svg>
