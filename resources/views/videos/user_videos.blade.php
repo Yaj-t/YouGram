@@ -25,7 +25,13 @@
                                         <h5>{{ $video->videos_title }}</h5>
                                         <p style="font-size: 14px; margin-bottom: 0;">{{ $video->user->name }}</p>
                                         <p style="font-size: 14px; margin-bottom: 0;">Views: {{ $video->views }}</p>
-                                        <p style="font-size: 14px; margin-bottom: 0;">Likes: {{ $video->likes->count(   ) }}</p>
+                                        <p style="font-size: 14px; margin-bottom: 0;">Likes: {{ $video->likes->count() }}</p>
+                                        <p style="font-size: 14px; margin-bottom: 0;">Tags: </p>
+                                            <ul>
+                                                @foreach ($video->tags as $tag)
+                                                    <li>{{ $tag->name }}</li>
+                                                @endforeach
+                                            </ul>
                                     </div>
                                 </div>
                             </div>
