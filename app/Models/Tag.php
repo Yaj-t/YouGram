@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
-
+    protected $fillable = [
+        'name',
+    ];
     public function videos(): BelongsToMany
     {
         return $this->belongsToMany(Video::class, 'tag_video');
