@@ -149,7 +149,6 @@ class VideoController extends Controller
 
         return view('videos.search', compact('videos'));
     }
-
     public function trending()
     {
 
@@ -161,5 +160,4 @@ class VideoController extends Controller
     
         return view('videos.trending', compact('videos'));
     }
-    
 }
