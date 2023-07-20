@@ -83,7 +83,10 @@ class VideoController extends Controller
 
     public function edit(Video $video)
     {
-        return view('videos.edit', compact('video'));
+        $tags = Tag::all();
+        $video_tags = $video->tags;
+
+        return view('videos.edit', compact('video', 'tags', 'video_tags'));
     }
 
     public function update(Request $request, Video $video)
@@ -111,8 +114,15 @@ class VideoController extends Controller
 
         $video->save();
 
+        $video->tags()->detach();
+        
         $tags = $request->input('tags', []);
-        $video->tags()->sync($tags);
+        if (isset($tags)) {
+            foreach ($tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $video->tags()->attach($tag->id);
+            }
+        }
 
         return redirect()->route('videos.index');
     }
