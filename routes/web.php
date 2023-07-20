@@ -27,9 +27,11 @@ Auth::routes();
 
 Route::redirect('/home', 'videos')->name('home');
 
-Route::get('/admin-users', function () {
-    return view('users-admin');
-});
+// routes/web.php
+
+Route::get('/admin-users', [UserController::class, 'adminIndex']);
+
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::get('/users-admin', [ProfileController::class, 'index'])->name('users-admin')->middleware('auth');
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
 
