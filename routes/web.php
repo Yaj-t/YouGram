@@ -44,6 +44,7 @@ Route::get('/user/{user}/subscriptions', [UserController::class, 'subscriptions'
 Route::get('/user/{user}/subscribers', [UserController::class, 'subscribers'])->name('user.subscribers')->middleware('auth');
 
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index')->middleware('auth');
+Route::get('/videos-admin', [VideoController::class, 'adminIndex'])->name('videos.admin-index')->middleware('auth');
 Route::get('/videos/tag/{tag}', [VideoController::class, 'videosWithTag'])->name('videos.tag')->middleware('auth');
 Route::get('/videos-user', [VideoController::class, 'userVideos'])->name('videos-user')->middleware('auth');
 Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create')->middleware('auth');
@@ -52,6 +53,8 @@ Route::get('/videos/{video}', [VideoController::class, 'show'])->name('videos.sh
 Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit')->middleware('auth');
 Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update')->middleware('auth');
 Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy')->middleware('auth');
+
+
 Route::get('/search', [VideoController::class, 'search'])->name('videos.search');
 Route::get('/trending', [VideoController::class, 'trending'])->name('videos.trending');
 

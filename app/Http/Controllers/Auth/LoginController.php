@@ -43,7 +43,7 @@ class LoginController extends Controller
         if (auth()->user()->usertype === 'admin') {
             return '/admin-users';
         } else {
-            return '/home';
+            return '/videos';
         }
     }
 }

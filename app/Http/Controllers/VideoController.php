@@ -16,6 +16,23 @@ class VideoController extends Controller
         return view('videos.index', compact('videos'));
     }
 
+    public function adminIndex(Request $request)
+    {
+        $sort = $request->query('sort', 'views');
+
+        $query = Video::withCount('likes')->with('tags');   
+
+        if ($sort === 'likes') {
+            $query->orderByDesc('likes_count');
+        } elseif ($sort === 'views') {
+            $query->orderByDesc('views');
+        }
+
+        $videos = $query->get();
+
+        return view('videos.admin-index', compact('videos'));
+    }
+
     public function videosWithTag($tag)
     {
         $tag = Tag::where('name', $tag)->firstOrFail();
@@ -124,7 +141,11 @@ class VideoController extends Controller
             }
         }
 
-        return redirect()->route('videos.index');
+        if (auth()->user()->usertype === 'admin') {
+            return redirect()->route('videos.admin-index');
+        } else {
+            return redirect()->route('videos.index');
+        }
     }
 
     public function destroy(Video $video)
