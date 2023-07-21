@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.nav-admin')
+@extends('layouts.sideadmin')
 
 @section('content')
 <div class="container">
@@ -20,6 +21,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
                             <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                                 @csrf
                                 @method('DELETE')
@@ -35,3 +37,4 @@
     </div>
 </div>
 @endsection
+    

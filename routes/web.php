@@ -29,11 +29,14 @@ Route::redirect('/home', 'videos')->name('home');
 
 // routes/web.php
 
-Route::get('/admin-users', [UserController::class, 'adminIndex']);
+Route::get('/admin-users', [UserController::class, 'adminIndex'])->name('admin.user');
 
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::get('/users-admin', [ProfileController::class, 'index'])->name('users-admin')->middleware('auth');
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
 Route::get('/user/{user}', [UserController::class, 'show'])->name('user.profile')->middleware('auth');;

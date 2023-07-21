@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -34,6 +35,33 @@ class UserController extends Controller
         $subscribers = $user->subscribers;
         // dd(compact('user', 'subscribers'));
         return view('user.subscribers', compact('user', 'subscribers'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:6|confirmed',
+        ]);
+
+        // Update user data
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+
+        // Update password if provided
+        if ($validatedData['password']) {
+            $user->password = Hash::make($validatedData['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.user');
     }
 
     public function destroy(User $user)

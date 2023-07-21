@@ -2,7 +2,7 @@
         <!-- Nav Bar -->
         <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #24272C;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('admin.user') }}">
                     <img src="{{ asset('images/yougram-high-resolution-logo-color-on-transparent-background.png') }}" style="max-width: 150px; max-height: 150px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
