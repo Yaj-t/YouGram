@@ -2,7 +2,7 @@
         <!-- Nav Bar -->
         <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #24272C;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('admin.user') }}">
                     <img src="{{ asset('images/yougram-high-resolution-logo-color-on-transparent-background.png') }}" style="max-width: 150px; max-height: 150px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -13,15 +13,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
-                    </ul>
-                                        <!-- Middle of Navbar -->
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <form action="{{ route('videos.search') }}" method="get" class="d-flex">
-                                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-light" type="submit">Search</button>
-                            </form>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -54,20 +45,8 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" style="background-color: #24272C" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('profile.show', Auth::user()) }}" style="color: white;"> 
-                                    {{ __('Profile Page') }}
-                                </a>
                                 <a class="dropdown-item" href="#" style="color: white;" onclick="toggleProfileEdit();">
                                     {{ __('Edit Profile') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('videos.create') }}" style="color: white;" >
-                                    {{ __('Upload Video') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('videos-user') }}" style="color: white;">
-                                    {{ __('Your Videos') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('user.subscribers', Auth::user()) }}" style="color: white;">
-                                    {{ __('Your Subscribers') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" style="color: white;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

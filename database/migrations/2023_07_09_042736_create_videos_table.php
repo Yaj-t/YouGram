@@ -15,8 +15,8 @@ class CreateVideosTable extends Migration
             $table->string('video_path')->default('');
             $table->string('videos_title');
             $table->string('videos_description');
+            $table->string('thumbnail_path')->nullable();
             $table->unsignedBigInteger('views')->default(0);
-            $table->unsignedBigInteger('likes')->default(0);
             $table->timestamps();
         });
     }

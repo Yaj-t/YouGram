@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class ProfileController extends Controller
 {
@@ -13,39 +15,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $users = User::all(); // Retrieve all users from the users table
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $profile)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $profile)
-    {
-        //
+        return view('users-admin', compact('users'));
     }
 
     /**
@@ -74,6 +46,18 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('home');
+    }
+
+    public function show(User $user)
+    {
+        // Retrieve videos, subscribers, subscriptions, or any other data related to the user
+        $videos = $user->videos;
+        $subscribers = $user->subscribers;
+        $subscriptions = $user->subscriptions;
+        $likedVideos = $user->likes()->with('video')->get();    
+
+
+        return view('profile.show', compact('user', 'videos', 'subscribers', 'subscriptions', 'likedVideos'));
     }
 
     /**

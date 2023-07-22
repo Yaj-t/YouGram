@@ -1,60 +1,194 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\User;
+use App\Models\Tag;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
     public function index()
     {
-        // Retrieve all videos
+        $videos = Video::latest()->get();
+
+        return view('videos.index', compact('videos'));
     }
 
-    public function create()
+    public function adminIndex(Request $request)
     {
-        // Show the form to create a new video
+        $sort = $request->query('sort', 'views');
+
+        $query = Video::withCount('likes')->with('tags');   
+
+        if ($sort === 'likes') {
+            $query->orderByDesc('likes_count');
+        } elseif ($sort === 'views') {
+            $query->orderByDesc('views');
+        }
+
+        $videos = $query->get();
+
+        return view('videos.admin-index', compact('videos'));
     }
 
-    public function insert(Request $request, User $user, TagsController $tagsController)
+    public function videosWithTag($tag)
+    {
+        $tag = Tag::where('name', $tag)->firstOrFail();
+        $videos = $tag->videos;
+
+        return view('videos.by_tag', compact('tag', 'videos'));
+    }
+
+    public function create()    
+    {   
+        $tags = Tag::all();
+
+        return view('videos.create', compact('tags'));
+    }
+
+    public function store(Request $request)
     {
         $request->validate([
-            'uv_video' => 'required|mimes:mp4', // Validate video file
+            'uv_video' => 'required|mimes:mp4',
             'uv_title' => 'required',
             'uv_description' => 'required',
+            'tags' => 'nullable|array',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $user = Auth::user();
 
         $video = new Video();
         $video->user_id = $user->id;
         $video->videos_title = $request->input('uv_title');
         $video->videos_description = $request->input('uv_description');
-        $video->save();
 
-        // Get the selected tags from the request
-        $selectedTags = $request->only(['php', 'cplusplus', 'mysql', 'swift', 'csharp', 'others']);
-
-        // Store the selected tags in the tags table
-        $tagsController->storeTags($video, $selectedTags);
-
-        // Handle video file upload, if required
         if ($request->hasFile('uv_video')) {
             $videoFile = $request->file('uv_video');
-            $videoPath = $videoFile->store('public/videos'); // Save the video file to the specified path
-            $video->video_path = Storage::url($videoPath); // Store the video path in the database
-            $video->save();
+            $videoPath = $videoFile->store('public/videos');
+            $video->video_path = Storage::url($videoPath);
         }
 
-        return redirect()->route('home');
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailFile = $request->file('thumbnail');
+            $thumbnailPath = $thumbnailFile->store('public/thumbnails');
+            $video->thumbnail_path = Storage::url($thumbnailPath);
+        }
+
+        $video->save();
+
+        // Handle video tags
+        $tags = $request->input('tags', []);
+        if (isset($tags)) {
+            foreach ($tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $video->tags()->attach($tag->id);
+            }
+        }
+
+        return redirect()->route('videos.index');
     }
+
 
     public function show(Video $video)
     {
-        // Show a specific video
-
+        $video->increment('views');
+        return view('videos.show', compact('video'));
     }
 
-    // Other methods like edit, update, and destroy can be added as needed
+    public function edit(Video $video)
+    {
+        $tags = Tag::all();
+        $video_tags = $video->tags;
+
+        return view('videos.edit', compact('video', 'tags', 'video_tags'));
+    }
+
+    public function update(Request $request, Video $video)
+    {
+        $request->validate([
+            'uv_title' => 'required',
+            'uv_description' => 'required',
+            'tags' => 'nullable|array',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $video->videos_title = $request->input('uv_title');
+        $video->videos_description = $request->input('uv_description');
+
+        if ($request->hasFile('thumbnail')) {
+            // Delete the existing thumbnail
+            if ($video->thumbnail_path) {
+                Storage::delete($video->thumbnail_path);
+            }
+
+            $thumbnailFile = $request->file('thumbnail');
+            $thumbnailPath = $thumbnailFile->store('public/thumbnails');
+            $video->thumbnail_path = $thumbnailPath;
+        }
+
+        $video->save();
+
+        $video->tags()->detach();
+        
+        $tags = $request->input('tags', []);
+        if (isset($tags)) {
+            foreach ($tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $video->tags()->attach($tag->id);
+            }
+        }
+
+        if (auth()->user()->usertype === 'admin') {
+            return redirect()->route('videos.admin-index');
+        } else {
+            return redirect()->route('videos.index');
+        }
+    }
+
+    public function destroy(Video $video)
+    {
+        $video->delete();
+
+        // Optionally, delete the associated video file from storage
+
+        return back();
+    }
+
+     public function userVideos()
+    {
+        $user = Auth::user();
+        $videos = $user->videos()->latest()->get();
+
+        return view('videos.user_videos', compact('videos'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $videos = Video::where('videos_title', 'like', "%$query%")
+                    ->orWhereHas('tags', function ($tagQuery) use ($query) {
+                        $tagQuery->where('name', 'like', "%$query%");
+                    })
+                    ->orWhereHas('user', function ($userQuery) use ($query) {
+                        $userQuery->where('name', 'like', "%$query%");
+                    })
+                    ->get();
+
+        return view('videos.search', compact('videos'));
+    }
+    public function trending()
+    {
+
+        // fetch videos with the highest views in the last 7 days
+    
+        $videos = Video::whereDate('created_at', '>=', now()->subDays(7))
+                               ->orderBy('views', 'desc')
+                               ->get();
+    
+        return view('videos.trending', compact('videos'));
+    }
 }
