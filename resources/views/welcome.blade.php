@@ -46,7 +46,7 @@
             background-attachment: fixed;
             line-height: inherit;
         }
-
+  
         hr {
             height: 0;
             color: inherit;
