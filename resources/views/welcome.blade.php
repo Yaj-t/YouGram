@@ -35,7 +35,7 @@
             @endauth
         </div>
         @endif
-            <p>hello word</p>
+           
         <div class="max-w-10xl mx-auto p-6 lg:p-8">
             <div class="mt-16">
                 <div class="grid grid-cols-4 md:grid-cols-4 gap-4 lg:gap-6" style="grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 0; margin-top: 156px;">
