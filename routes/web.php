@@ -35,7 +35,7 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.
 Route::get('/users-admin', [ProfileController::class, 'index'])->name('users-admin')->middleware('auth');
 Route::put('/users/{user}', [ProfileController::class, 'update'])->name('users.update')->middleware('auth');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+Route::put('/users/update/{user}', [UserController::class, 'adminUpdate'])->name('users.adminUpdate');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
