@@ -2,13 +2,14 @@
 @extends('layouts.nav-admin')
 @extends('layouts.sideadmin')
 @section('content')
-    <h1>All Videos</h1>
+    <h1 style="color: aliceblue;"><i>All Videos</i></h1>
     <div>
-        <a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}">Sort by Likes</a>
-        <a href="{{ route('videos.admin-index', ['sort' => 'views']) }}">Sort by Views</a>
+        <a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}"><i>Sort by Likes</i></a><br>
+        <a href="{{ route('videos.admin-index', ['sort' => 'views']) }}"><i>Sort by Views</i></a>
     </div>
-    <table>
-        <thead>
+    <div class="container mt-3">
+        <table class="table table-dark">
+            <thead>
             <tr>
                 <th>Title</th>
                 <th>Description</th>
@@ -17,8 +18,8 @@
                 <th>Tags</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach($videos as $video)
                 <tr>
                     <td>{{ $video->videos_title }}</td>
@@ -31,15 +32,19 @@
                         @endforeach
                     </td>
                     <td>
-                        <a href="{{ route('videos.edit', $video) }}">Edit</a>
+                        <a href="{{ route('videos.edit', $video) }}">
+                            <button type="button" class="btn btn-outline-primary" style="margin-bottom: 5px;">Edit</button>
+                        </a>
                         <form action="{{ route('videos.destroy', $video) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this video?')">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this video?')">Delete</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 @endsection
+
