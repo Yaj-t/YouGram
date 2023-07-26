@@ -19,7 +19,7 @@
 <body>
 
     <!-- Side Bar -->
-    <div class="d-flex flex-column flex-shrink-0 side-bar-wrapper">
+    <div class="d-flex justify-content-center align-items-center side-bar-wrapper">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li>
                 <a href="{{ route('admin.user') }}" class="nav-link py-3 border-bottom" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
