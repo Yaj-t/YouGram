@@ -46,8 +46,9 @@
                                 <div class="btn-group ml-2" role="group" aria-label="Subscribe">
                                     @if (auth()->user()->id !== $video->user->id)
                                     @if (auth()->user()->isSubscribedTo($video->user))
-                                    <form action="{{ route('unsubscribe', $video->user) }}" method="post">
+                                    <form action="{{ route('unsubscribe', $video->user) }}" method="POST">  
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Unsubscribe</button>
                                     </form>
                                     @else
