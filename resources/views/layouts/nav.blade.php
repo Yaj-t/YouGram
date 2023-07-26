@@ -62,7 +62,7 @@
                         <a class="dropdown-item" href="{{ route('videos.create') }}" style="color: white;">
                             {{ __('Upload Video') }}
                         </a>
-                        <a class="dropdown-item" href="{{ route('videos-user') }}" style="color: white;">
+                        <a class="dropdown-item" href="{{ route('videos-user', Auth::user()) }}" style="color: white;">
                             {{ __('Your Videos') }}
                         </a>
                         <a class="dropdown-item" href="{{ route('user.subscribers', Auth::user()) }}" style="color: white;">
