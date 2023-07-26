@@ -58,11 +58,6 @@ Route::get('/search', [VideoController::class, 'search'])->name('videos.search')
 Route::get('/trending', [VideoController::class, 'trending'])->name('videos.trending');
 
 
-<<<<<<< HEAD
-=======
-Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
-
->>>>>>> 07a4e01141b4c23c4964ccfc85a97ed36636d5ef
 Route::post('/subscribe/{user}', [SubscriptionController::class, 'subscribe'])->name('subscribe')->middleware('auth');
 // Route::post('/unsubscribe/{user}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe')->middleware('auth');
 Route::delete('/unsubscribe/{user}', [SubscriptionController::class, 'unsubscribe'])->name('unsubscribe')->middleware('auth');
