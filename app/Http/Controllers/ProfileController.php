@@ -54,8 +54,7 @@ class ProfileController extends Controller
         $videos = $user->videos;
         $subscribers = $user->subscribers;
         $subscriptions = $user->subscriptions;
-        $likedVideos = $user->likes()->with('video')->get();    
-
+        $likedVideos = $user->likedVideos()->get();    
 
         return view('profile.show', compact('user', 'videos', 'subscribers', 'subscriptions', 'likedVideos'));
     }

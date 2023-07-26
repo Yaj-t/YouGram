@@ -1,47 +1,138 @@
-<!-- resources/views/profile/show.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="color:white;">
-        <h1>{{ $user->name }}'s Profile</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="profile-image-wrapper">
+                                <img src="{{ asset(Auth::user()->image) }}" alt="Profile Image" style="width: 100px; height: 90px; border-radius: 50%;">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h1>{{ $user->name }}'s Profile</h1>
+                            <h4>{{ $user->email }}</h4>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-end">
+                            <a href="{{ route('videos.index') }}" class="btn btn-danger x-mark" style="margin-top: 20px; margin-right: 10px;">
+                                <span class="x-mark-letter" aria-hidden="true">X</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-        {{-- Display user information or additional details here --}}
-        {{-- For example: --}}
-        <p>Email: {{ $user->email }}</p>
+                <div class="card-body" style="color: white;">
 
-        <h2>Videos</h2>
-        <ul>
-            @foreach ($videos as $video)
-                <li>{{ $video->videos_title }}</li>
-            @endforeach
-        </ul>
+                    <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="videos-tab" data-bs-toggle="tab" href="#videosContent" role="tab" aria-controls="videosContent" aria-selected="true" style="color: green;">Videos</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="subscribers-tab" data-bs-toggle="tab" href="#subscribersContent" role="tab" aria-controls="subscribersContent" aria-selected="false" style="color: green;">Subscribers</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="subscriptions-tab" data-bs-toggle="tab" href="#subscriptionsContent" role="tab" aria-controls="subscriptionsContent" aria-selected="false" style="color: green;">Subscriptions</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="likedVideos-tab" data-bs-toggle="tab" href="#likedVideosContent" role="tab" aria-controls="likedVideosContent" aria-selected="false" style="color: green;">Liked Videos</a>
+                        </li>
+                    </ul>
 
-        <h2>Subscribers</h2>
-        <ul>
-            @foreach ($subscribers as $subscriber)
-                <li>{{ $subscriber->name }}</li>
-            @endforeach
-        </ul>
-
-        <h2>Subscriptions</h2>
-        <ul>
-            @foreach ($subscriptions as $subscription)
-                <li>
-                    {{ $subscription->name }}
-                    <form action="{{ route('unsubscribe', $subscription) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Unsubscribe</button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
-        <h2>Liked Videos</h2>
-        <ul>
-            @foreach ($likedVideos as $likedVideo)
-                <li>{{ $likedVideo->title }}</li>
-            @endforeach
-        </ul>
+                    <div class="tab-content" id="profileTabContent">
+                        <div class="tab-pane fade show active" id="videosContent" role="tabpanel" aria-labelledby="videos-tab">
+                            <div class="section-container" style="background-color: #24272C; padding: 10px;">
+                                @if ($videos->isEmpty())
+                                <p>NONE</p>
+                                @else
+                                <ol>
+                                    @foreach ($videos as $video)
+                                    <li style="padding: 10px;"><a href="{{ route('videos.show', $video) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: green;">{{ $video->videos_title }}</a></li>
+                                    @endforeach
+                                </ol>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="subscribersContent" role="tabpanel" aria-labelledby="subscribers-tab">
+                            <div class="section-container" style="background-color: #24272C; padding: 10px;">
+                                @if($subscribers->isEmpty())
+                                <p class="text-center">NONE</p>
+                                @else
+                                <div class="row">
+                                    @foreach ($subscribers as $subscriber)
+                                    <div class="col-md-3 text-center">
+                                        @php
+                                        // Check if a user with the same name exists in the 'users' table
+                                        $userWithSameName = \App\Models\User::where('name', $subscriber->name)->first();
+                                        @endphp
+                                        @if($userWithSameName)
+                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscriber->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        @else
+                                        <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
+                                        <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscriber->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        @endif
+                                        <p>{{ $subscriber->name }}</p>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="subscriptionsContent" role="tabpanel" aria-labelledby="subscriptions-tab">
+                            <div class="section-container" style="background-color: #24272C; padding: 10px;">
+                                @if($subscriptions->isEmpty())
+                                <p class="text-center">NONE</p>
+                                @else
+                                <div class="row">
+                                    @foreach ($subscriptions as $subscription)
+                                    <div class="col-md-3 text-center">
+                                        @php
+                                        // Check if a user with the same name exists in the 'users' table
+                                        $userWithSameName = \App\Models\User::where('name', $subscription->name)->first();
+                                        @endphp
+                                        @if($userWithSameName)
+                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        @else
+                                        <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
+                                        <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        @endif
+                                        <p>{{ $subscription->name }}</p>
+                                        <form action="{{ route('unsubscribe', $subscription) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" style="margin-top: -15px;">Unsubscribe</button>
+                                        </form>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="likedVideosContent" role="tabpanel" aria-labelledby="likedVideos-tab">
+                            <div class="section-container" style="background-color: #24272C; padding: 10px;">
+                                @if($likedVideos->isEmpty())
+                                <p>NONE</p>
+                                @else
+                                <ul>
+                                    @foreach ($likedVideos as $likedVideo)
+                                    <li> {{ $likedVideo->videos_title }}</li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new bootstrap.Tab(document.getElementById('profileTabs'));
+    });
+</script>
