@@ -68,10 +68,10 @@
                                         $userWithSameName = \App\Models\User::where('name', $subscriber->name)->first();
                                         @endphp
                                         @if($userWithSameName)
-                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscriber->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscriber->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                                         @else
                                         <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
-                                        <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscriber->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscriber->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                                         @endif
                                         <p>{{ $subscriber->name }}</p>
                                     </div>
@@ -93,10 +93,10 @@
                                         $userWithSameName = \App\Models\User::where('name', $subscription->name)->first();
                                         @endphp
                                         @if($userWithSameName)
-                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                                         @else
                                         <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
-                                        <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
+                                        <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                                         @endif
                                         <p>{{ $subscription->name }}</p>
                                         <form action="{{ route('unsubscribe', $subscription) }}" method="POST">
@@ -115,11 +115,11 @@
                                 @if($likedVideos->isEmpty())
                                 <p>NONE</p>
                                 @else
-                                <ul>
+                                <ol>
                                     @foreach ($likedVideos as $likedVideo)
-                                    <li> {{ $likedVideo->videos_title }}</li>
+                                    <li style="padding: 10px;"><a href="{{ route('videos.show', $likedVideo) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: green;">{{ $likedVideo->videos_title }}</a></li>
                                     @endforeach
-                                </ul>
+                                </ol>
                                 @endif
                             </div>
                         </div>
