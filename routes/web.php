@@ -71,6 +71,3 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/{video}', [LikeController::class, 'like'])->name('like');
     Route::post('/unlike/{video}', [LikeController::class, 'unlike'])->name('unlike');
 });
-
-
-
