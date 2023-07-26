@@ -123,10 +123,9 @@ class VideoController extends Controller
             if ($video->thumbnail_path) {
                 Storage::delete($video->thumbnail_path);
             }
-
             $thumbnailFile = $request->file('thumbnail');
             $thumbnailPath = $thumbnailFile->store('public/thumbnails');
-            $video->thumbnail_path = $thumbnailPath;
+            $video->thumbnail_path = Storage::url($thumbnailPath);
         }
 
         $video->save();

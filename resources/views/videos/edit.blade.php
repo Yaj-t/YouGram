@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="card-body d-flex flex-column">
-                    <form action="{{ route('videos.update', $video) }}" method="POST" class="flex-grow-1">
+                    <form action="{{ route('videos.update', $video) }}" method="POST" enctype="multipart/form-data" class="flex-grow-1">
                         @csrf
                         @method('PUT')
 
@@ -41,6 +41,14 @@
                                 <label class="form-check-label" for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
                             </div>
                             @endforeach
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new_thumbnail">{{ __('Thumbnail') }}</label>
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/jpeg, image/png">
+                            @error('thumbnail')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group d-flex justify-content-center">
