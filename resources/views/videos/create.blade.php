@@ -12,7 +12,7 @@
                             <h1> {{ __('UPLOAD VIDEO') }}</h1>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end">
-                            <a href="/user_videos" class="btn btn-danger x-mark" style="margin-top: 20px; margin-right: 10px;">
+                            <a href="{{ route('videos.index') }}" class="btn btn-danger x-mark" style="margin-top: 20px; margin-right: 10px;">
                                 <span class="x-mark-letter" aria-hidden="true">X</span>
                             </a>
                         </div>
