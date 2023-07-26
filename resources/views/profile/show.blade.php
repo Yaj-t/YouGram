@@ -28,16 +28,16 @@
 
                     <ul class="nav nav-tabs" id="profileTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="videos-tab" data-bs-toggle="tab" href="#videosContent" role="tab" aria-controls="videosContent" aria-selected="true">Videos</a>
+                            <a class="nav-link active" id="videos-tab" data-bs-toggle="tab" href="#videosContent" role="tab" aria-controls="videosContent" aria-selected="true" style="color: green;">Videos</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="subscribers-tab" data-bs-toggle="tab" href="#subscribersContent" role="tab" aria-controls="subscribersContent" aria-selected="false">Subscribers</a>
+                            <a class="nav-link" id="subscribers-tab" data-bs-toggle="tab" href="#subscribersContent" role="tab" aria-controls="subscribersContent" aria-selected="false" style="color: green;">Subscribers</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="subscriptions-tab" data-bs-toggle="tab" href="#subscriptionsContent" role="tab" aria-controls="subscriptionsContent" aria-selected="false">Subscriptions</a>
+                            <a class="nav-link" id="subscriptions-tab" data-bs-toggle="tab" href="#subscriptionsContent" role="tab" aria-controls="subscriptionsContent" aria-selected="false" style="color: green;">Subscriptions</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="likedVideos-tab" data-bs-toggle="tab" href="#likedVideosContent" role="tab" aria-controls="likedVideosContent" aria-selected="false">Liked Videos</a>
+                            <a class="nav-link" id="likedVideos-tab" data-bs-toggle="tab" href="#likedVideosContent" role="tab" aria-controls="likedVideosContent" aria-selected="false" style="color: green;">Liked Videos</a>
                         </li>
                     </ul>
 
@@ -49,7 +49,7 @@
                                 @else
                                 <ol>
                                     @foreach ($videos as $video)
-                                    <li style="padding: 10px;"><a href="{{ route('videos.show', $video) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">{{ $video->videos_title }}</a></li>
+                                    <li style="padding: 10px;"><a href="{{ route('videos.show', $video) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: green;">{{ $video->videos_title }}</a></li>
                                     @endforeach
                                 </ol>
                                 @endif
@@ -117,7 +117,7 @@
                                 @else
                                 <ul>
                                     @foreach ($likedVideos as $likedVideo)
-                                    <li>{{ $likedVideo->title }}</li>
+                                    <li> {{ $likedVideo->title }}</li>
                                     @endforeach
                                 </ul>
                                 @endif
