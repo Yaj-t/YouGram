@@ -117,7 +117,7 @@
                                 @else
                                 <ul>
                                     @foreach ($likedVideos as $likedVideo)
-                                    <li> {{ $likedVideo->title }}</li>
+                                    <li> {{ $likedVideo->videos_title }}</li>
                                     @endforeach
                                 </ul>
                                 @endif
