@@ -4,8 +4,8 @@
 @section('content')
     <h1 style="color: aliceblue;"><i>All Videos</i></h1>
     <div>
-        <a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}"><i>Sort by Likes</i></a><br>
-        <a href="{{ route('videos.admin-index', ['sort' => 'views']) }}"><i>Sort by Views</i></a>
+        <button type="button" class="btn btn-dark"><a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}"><b>Sort by Likes</b></a><br></button> <a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}">
+            <button type="button" class="btn btn-dark"><a href="{{ route('videos.admin-index', ['sort' => 'views']) }}"><b>Sort by Views</b></a></button>
     </div>
     <div class="container mt-3">
         <table class="table table-dark">
@@ -34,7 +34,7 @@
                     </td>
                     <td>
                         <a href="{{ route('videos.edit', $video) }}">
-                            <button type="button" class="btn btn-outline-primary" style="margin-bottom: 5px;">Edit</button>
+                            <button type="button" class="btn btn-primary" style="margin-bottom: 5px;">Edit</button>
                         </a>
                         <form action="{{ route('videos.destroy', $video) }}" method="POST">
                             @csrf
