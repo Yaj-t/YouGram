@@ -3,51 +3,60 @@
 @extends('layouts.nav')
 
 @section('content')
-    <div class="container videos" style="margin-top: 20px;">
-        <h1 class="text-center mb-4 text-white bg-dark rounded-lg" style="font-size: 2rem; padding: 10px;">Your Videos</h1>
-        <div class="row">
-            @if ($videos->isEmpty())
-                <p>No videos uploaded yet.</p>
-            @else
-                @foreach ($videos as $video)
-                    <div class="col-md-4" style="margin-bottom: 20px;">
-                        <div class="card">
-                        <a href="{{ route('videos.show', $video) }}" target="_blank" rel="noopener noreferrer">
-                            <div class="card">
-                                <div class="card-body" style="position: relative; padding-bottom: 56.25%;">
-                                    <img src="{{ asset($video->thumbnail_path) }}" alt="Thumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                                </div>
-                                <div class="card-header" style="position: relative; margin-top: 20px;">
-                                    <div style="position: absolute; bottom: 10px; left: 10px;">
-                                        <img src="{{ $video->user->image }}" alt="User Image" style="width: 40px; height: 40px; border-radius: 50%;">
-                                    </div>
-                                    <div style="padding-left: 60px;">
-                                        <h5>{{ $video->videos_title }}</h5>
-                                        <p style="font-size: 14px; margin-bottom: 0;">{{ $video->user->name }}</p>
-                                        <p style="font-size: 14px; margin-bottom: 0;">Views: {{ $video->views }}</p>
-                                        <p style="font-size: 14px; margin-bottom: 0;">Likes: {{ $video->likes->count() }}</p>
-                                        <p style="font-size: 14px; margin-bottom: 0;">Tags: </p>
-                                            <ul>
-                                                @foreach ($video->tags as $tag)
-                                                    <li>{{ $tag->name }}</li>
-                                                @endforeach
-                                            </ul>
-                                    </div>
-                                </div>
+
+<head>
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+</head>
+
+<div class="container videos index-page" style="margin-top: 20px;">
+    <h1 class="text-center mb-4 text-white bg-dark rounded-lg" style="font-size: 2rem; padding: 10px;">YOUR VIDEOS</h1>
+    <div class="row">
+        @foreach ($videos as $video)
+        <div class="col-md-4">
+            <a href="{{ route('videos.show', $video) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="{{ asset($video->thumbnail_path) }}" alt="Thumbnail">
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="{{ asset($video->user->image) }}" alt="User Image">
                             </div>
-                        </a>
-                            <div class="card-footer">
-                                <a href="{{ route('videos.edit', $video) }}" class="btn btn-secondary">Edit</a>
-                                <form action="{{ route('videos.destroy', $video) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                            <div class="col-md-10">
+                                <h5 style="color: white;">{{ \Illuminate\Support\Str::limit($video->videos_title, 30, '...') }}</h5>
                             </div>
                         </div>
+                        <div class="row" style="margin-top: -10px;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <p style="color: white;">{{ $video->user->name }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p style="color: white;">Views: </p>
+                            </div>
+                            <div class="col-md-3">
+                                <p style="color: white;">Likes: </p>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: -17px;">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-3" style="color: white;">{{ $video->views }}</div>
+                            <div class="col-md-3" style="color: white;">{{ $video->likes->count() }}</div>
+                        </div>
                     </div>
-                @endforeach
-            @endif
+                    <div class="card-footer">
+                        <a href="{{ route('videos.edit', $video) }}" class="btn btn-secondary">Edit</a>
+                        <form action="{{ route('videos.destroy', $video) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </a>
         </div>
+        @endforeach
     </div>
+</div>
 @endsection
