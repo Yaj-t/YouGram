@@ -22,7 +22,8 @@
             <tbody>
             @foreach($videos as $video)
                 <tr>
-                    <td>{{ $video->videos_title }}</td>
+                    <td>
+                    <a href="{{ route('videos.show', $video) }}">{{ $video->videos_title }}</a></td>
                     <td>{{ $video->videos_description }}</td>
                     <td>{{ $video->likes_count }}</td>
                     <td>{{ $video->views }}</td>
