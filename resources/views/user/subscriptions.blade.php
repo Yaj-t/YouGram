@@ -25,19 +25,22 @@
                         @else
                         @foreach ($subscriptions as $subscription)
                         <div class="row mb-3">
-                            <div class="col-md-9 d-flex align-items-center">
-                                @php
-                                // Check if a user with the same name exists in the 'users' table
-                                $userWithSameName = \App\Models\User::where('name', $subscription->name)->first();
-                                @endphp
-                                @if($userWithSameName)
-                                <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%; height: 50px; width: 50px;">
-                                @else
-                                <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
-                                <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
-                                @endif
-                                <p style="margin-left: 15px;">{{ $subscription->name }}</p>
-                            </div>
+                            <a href="{{ route('videos-user', $subscription) }}">
+                                <div class="col-md-9 d-flex align-items-center">
+                                    @php
+                                    // Check if a user with the same name exists in the 'users' table
+                                    $userWithSameName = \App\Models\User::where('name', $subscription->name)->first();
+                                    @endphp
+                                    @if($userWithSameName)
+                                    <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%; height: 50px; width: 50px;">
+                                    @else
+                                    <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
+                                    <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
+                                    @endif
+                                    <p style="margin-left: 15px;">{{ $subscription->name }}</p>
+                                </div>
+                            </a>
+                            
                             <div class="col-md-3 text-center align-self-center">
                                 <form action="{{ route('unsubscribe', $subscription) }}" method="POST">
                                     @csrf

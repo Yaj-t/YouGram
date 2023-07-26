@@ -161,7 +161,7 @@ class VideoController extends Controller
     {
         $videos = $user->videos()->latest()->get();
 
-        return view('videos.user_videos', compact('videos'));
+        return view('videos.user_videos', compact('videos', 'user'));
     }
 
     public function search(Request $request)

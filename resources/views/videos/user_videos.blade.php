@@ -9,7 +9,7 @@
 </head>
 
 <div class="container videos index-page" style="margin-top: 20px;">
-    <h1 class="text-center mb-4 text-white bg-dark rounded-lg" style="font-size: 2rem; padding: 10px;">YOUR VIDEOS</h1>
+    <h1 class="text-center mb-4 text-white bg-dark rounded-lg" style="font-size: 2rem; padding: 10px;">{{$user->name}}'s Videos</h1>
     <div class="row">
         @foreach ($videos as $video)
         <div class="col-md-4">
@@ -46,12 +46,14 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('videos.edit', $video) }}" class="btn btn-secondary">Edit</a>
-                        <form action="{{ route('videos.destroy', $video) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        @if ($user->password === Auth::user()->password)
+                            <a href="{{ route('videos.edit', $video) }}" class="btn btn-secondary">Edit</a>
+                            <form action="{{ route('videos.destroy', $video) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </a>
