@@ -14,11 +14,11 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('yougram.css') }}">
-
+   
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="{{ asset('custom.js') }}"></script>
-
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <style>
         body {
             margin: 0;
@@ -45,5 +45,9 @@
         @yield('register')
     </div>
     @extends('layouts.modals')
+
+    @push('styles')
+    <!-- Your custom styles, if any -->
+    @endpush    
 </body>
 </html>

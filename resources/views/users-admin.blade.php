@@ -22,7 +22,7 @@
                         <td>{{ $user->email }}</td>
                         <td>
                             <a href="{{ route('users.edit', $user->id) }}">
-                                <button class="btn btn-primary" style="margin-bottom:5px;">Edit</button>
+                                <button class="btn btn-primary" style="margin-bottom:5px;">Edit</button> 
                             </a>
                             <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                                 @csrf

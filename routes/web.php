@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
-use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeController;
 /*
@@ -46,7 +45,7 @@ Route::get('/user/{user}/subscribers', [UserController::class, 'subscribers'])->
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index')->middleware('auth');
 Route::get('/videos-admin', [VideoController::class, 'adminIndex'])->name('videos.admin-index')->middleware('auth');
 Route::get('/videos/tag/{tag}', [VideoController::class, 'videosWithTag'])->name('videos.tag')->middleware('auth');
-Route::get('/videos-user', [VideoController::class, 'userVideos'])->name('videos-user')->middleware('auth');
+Route::get('/videos-user/{user}', [VideoController::class, 'userVideos'])->name('videos-user')->middleware('auth');
 Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create')->middleware('auth');
 Route::post('/videos', [VideoController::class, 'store'])->name('videos.store')->middleware('auth');
 Route::get('/videos/{video}', [VideoController::class, 'show'])->name('videos.show')->middleware('auth');
@@ -57,7 +56,6 @@ Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('vid
 
 Route::get('/search', [VideoController::class, 'search'])->name('videos.search');
 Route::get('/trending', [VideoController::class, 'trending'])->name('videos.trending');
-
 
 
 Route::post('/subscribe/{user}', [SubscriptionController::class, 'subscribe'])->name('subscribe')->middleware('auth');

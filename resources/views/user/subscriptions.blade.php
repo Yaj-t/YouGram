@@ -24,7 +24,8 @@
                         <p class="text-center">NONE</p>
                         @else
                         @foreach ($subscriptions as $subscription)
-                        <div class="row mb-3">
+
+                        <div class="row mb-3 align-items-center">
                             <div class="col-md-9 d-flex align-items-center">
                                 @php
                                 // Check if a user with the same name exists in the 'users' table
@@ -36,7 +37,9 @@
                                 <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
                                 <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid" style="border-radius: 50%;">
                                 @endif
-                                <p style="margin-left: 15px;">{{ $subscription->name }}</p>
+                                <a href="{{ route('videos-user', $subscription) }}" style="text-decoration: none !important;">
+                                    <p style="color: green; margin-left: 15px;">{{ $subscription->name }}</p>
+                                </a>
                             </div>
                             <div class="col-md-3 text-center align-self-center">
                                 <form action="{{ route('unsubscribe', $subscription) }}" method="POST">

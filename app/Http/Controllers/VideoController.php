@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Video;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -156,12 +157,11 @@ class VideoController extends Controller
         return back();
     }
 
-     public function userVideos()
+     public function userVideos(User $user)
     {
-        $user = Auth::user();
         $videos = $user->videos()->latest()->get();
 
-        return view('videos.user_videos', compact('videos'));
+        return view('videos.user_videos', compact('videos', 'user'));
     }
 
     public function search(Request $request)
