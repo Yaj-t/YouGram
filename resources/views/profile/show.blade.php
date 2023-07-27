@@ -93,7 +93,9 @@
                                         $userWithSameName = \App\Models\User::where('name', $subscription->name)->first();
                                         @endphp
                                         @if($userWithSameName)
-                                        <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                                        <a href="{{ route('videos-user', $subscription) }}">
+                                            <img src="{{ asset($userWithSameName->image) }}" alt="{{ $subscription->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                                        </a>
                                         @else
                                         <!-- If user with the same name doesn't exist, show a default image or handle it as needed -->
                                         <img src="{{ asset('path_to_default_image.jpg') }}" alt="{{ $subscription->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
