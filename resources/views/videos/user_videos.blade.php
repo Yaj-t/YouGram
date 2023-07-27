@@ -47,12 +47,12 @@
                     </div>
                     <div class="card-footer">
                         @if ($user->password === Auth::user()->password)
-                            <a href="{{ route('videos.edit', $video) }}" class="btn btn-secondary">Edit</a>
-                            <form action="{{ route('videos.destroy', $video) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
+                        <a href="{{ route('videos.edit', $video) }}" class="btn btn-secondary">Edit</a>
+                        <form action="{{ route('videos.destroy', $video) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this video?')">Delete</button>
+                        </form>
                         @endif
                     </div>
                 </div>
