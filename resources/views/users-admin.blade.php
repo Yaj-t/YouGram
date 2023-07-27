@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>All Normal Users</h1>
-            <table class="table table-bordered">
+            <h1 style="color: aliceblue;"><i>All Normal Users</i></h1><br>
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -21,7 +21,9 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('users.edit', $user->id) }}">
+                                <button class="btn btn-primary" style="margin-bottom:5px;">Edit</button>
+                            </a>
                             <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                                 @csrf
                                 @method('DELETE')
@@ -37,4 +39,3 @@
     </div>
 </div>
 @endsection
-    
