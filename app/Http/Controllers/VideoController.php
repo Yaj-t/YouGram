@@ -99,6 +99,12 @@ class VideoController extends Controller
         return view('videos.show', compact('video'));
     }
 
+    public function showAdmin(Video $video)
+    {
+        $video->increment('views');
+        return view('videos.show-admin', compact('video'));
+    }
+
     public function edit(Video $video)
     {
         $tags = Tag::all();

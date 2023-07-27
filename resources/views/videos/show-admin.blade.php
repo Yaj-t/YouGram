@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-md-3"></div>
                             <div class="col-md-3 text-md-right">
-                                @if (auth()->check())
+                                <!-- @if (auth()->check())
                                 @if (auth()->user()->likes->contains('video_id', $video->id))
                                 <div class="btn-group" role="group" aria-label="Like and Subscribe">
                                     <form action="{{ route('unlike', $video) }}" method="post">
@@ -40,10 +40,10 @@
                                         <button type="submit" class="btn btn-primary">Like</button>
                                     </form>
                                 </div>
-                                @endif
+                                @endif -->
 
                                 <!-- Subscribe/Unsubscribe buttons -->
-                                <div class="btn-group ml-2" role="group" aria-label="Subscribe">
+                                <!-- <div class="btn-group ml-2" role="group" aria-label="Subscribe">
                                     @if (auth()->user()->id !== $video->user->id)
                                     @if (auth()->user()->isSubscribedTo($video->user))
                                     <form action="{{ route('unsubscribe', $video->user) }}" method="POST">
@@ -59,7 +59,7 @@
                                     @endif
                                     @endif
                                 </div>
-                                @endif
+                                @endif -->
                             </div>
 
                         </div>

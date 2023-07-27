@@ -51,7 +51,7 @@
                     @for ($page = 1; $page <= $totalPages; $page++) <li class="page-item @if ($page == $currentPage) active @endif">
                         <a class="page-link" href="?page={{ $page }}">{{ $page }}</a>
                         </li>
-                        @endfor
+                    @endfor
                 </ul>
             </nav>
         </div>
