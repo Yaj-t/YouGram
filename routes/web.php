@@ -54,7 +54,6 @@ Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('vide
 Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update')->middleware('auth');
 Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('videos.destroy')->middleware('auth');
 
-
 Route::get('/search', [VideoController::class, 'search'])->name('videos.search');
 Route::get('/trending', [VideoController::class, 'trending'])->name('videos.trending');
 
