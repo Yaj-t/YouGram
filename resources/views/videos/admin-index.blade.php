@@ -5,7 +5,12 @@
 
 <div class="container mt-3">
 
-    <table class="table table-dark">
+    <div>
+        <button type="button" class="btn btn-dark"><a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}" style="text-decoration: none !important; color:green;"><b>Sort by Likes</b></a><br></button> <a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}">
+            <button type="button" class="btn btn-dark"><a href="{{ route('videos.admin-index', ['sort' => 'views']) }}" style="text-decoration: none !important; color:green;"><b>Sort by Views</b></a></button>
+    </div>
+
+    <table class="table table-dark" style="margin-top: 20px">
         <thead>
             <tr>
                 <th>Title</th>
@@ -40,28 +45,20 @@
         </tbody>
     </table>
 
-    <div class="row">
-        <div class="col-md-8">
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    @php
-                    $totalPages = ceil($videos->count() / $perPage);
-                    @endphp
 
-                    @for ($page = 1; $page <= $totalPages; $page++) <li class="page-item @if ($page == $currentPage) active @endif">
-                        <a class="page-link" href="?page={{ $page }}">{{ $page }}</a>
-                        </li>
-                    @endfor
-                </ul>
-            </nav>
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-dark"><a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}" style="text-decoration: none !important; color:green;"><b>Sort by Likes</b></a><br></button> <a href="{{ route('videos.admin-index', ['sort' => 'likes']) }}">
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-dark"><a href="{{ route('videos.admin-index', ['sort' => 'views']) }}" style="text-decoration: none !important; color:green;"><b>Sort by Views</b></a></button>
-        </div>
-    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @php
+            $totalPages = ceil($videos->count() / $perPage);
+            @endphp
+
+            @for ($page = 1; $page <= $totalPages; $page++) <li class="page-item @if ($page == $currentPage) active @endif">
+                <a class="page-link" href="?page={{ $page }}">{{ $page }}</a>
+                </li>
+                @endfor
+        </ul>
+    </nav>
+</div>
 
 </div>
 @endsection
