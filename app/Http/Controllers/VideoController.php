@@ -155,10 +155,22 @@ class VideoController extends Controller
     }
 
     public function destroy(Video $video)
-    {
-        $video->delete();
+    {   
+        // Delete the video file from storage if it exists
+        if ($video->video_path) {
+            Storage::delete('public/videos/' . basename($video->video_path));
+        }
 
-        // Optionally, delete the associated video file from storage
+        // Delete the thumbnail file from storage if it exists
+        if ($video->thumbnail_path) {
+            Storage::delete('public/thumbnails/' . basename($video->thumbnail_path));
+        }
+
+        // Detach video tags before deleting the video
+        $video->tags()->detach();
+
+        // Delete the video record from the database
+        $video->delete();
 
         return back();
     }

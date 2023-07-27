@@ -32,7 +32,7 @@
                     <form action="{{ route('videos.destroy', $video) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="button" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this video?')">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this video?')">Delete</button>    
                     </form>
                 </td>
             </tr>
